@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">ATM</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="label_splash">Aplicativo móvil de inventario para señales de tránsito y semáforos en la ciudad de Guayaquil</string>
+
+    <!-- Prefs values-->
+    <string name="user_data">user_data</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Usuario</string>
+    <string name="prompt_password">Clave</string>
+    <string name="action_sign_in">Iniciar Sesión</string>
+    <string name="action_sign_in_short">Iniciar</string>
+    <string name="error_invalid_email">Usuario inválido</string>
+    <string name="error_invalid_password">Contraseña muy corta</string>
+    <string name="error_incorrect_password">Contraseña incorrecta</string>
+    <string name="error_field_required">Este campo es requerido</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string
+        name="google_maps_key"
+        templateMergeStrategy="preserve"
+        translatable="false">AIzaSyAs9TeSnQi6y3kjc0-U6V-aYpMuxPCkOzc
+    </string>
+
+    <!-- #############################   Error labels   #####################################-->
+    <string name="error_server">Error al conectar al servidor, por favor intente nuevamente ó notifique a la administración</string>
+    <string name="error_json">Error al parsear JSON por favor notifique a la administración</string>
+    <string name="error_data_received">Error en los datos recibidos, por favor notifique a la administración</string>
+    <string name="error_permissions">No has aceptado todos los permisos para usar esta función</string>
+
+    <!-- ############################    Main Labels    #####################################-->
+
+    <string name="signal_vertical">SEÑAL VERTICAL</string>
+    <string name="semaforo">SEMAFORO</string>
+    <string name="consultas">CONSULTAS</string>
+    <string name="order_works">ORDENES DE TRABAJO</string>
+    <string name="accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="confirm_title">Confirmar</string>
+    <string name="confirm_loguot">¿Esta seguro de salir?</string>
+    <string name="save">Guardar</string>
+    <string name="street_1">calle 1</string>
+    <string name="street_2">calle 2</string>
+    <string name="identificacion">identificacion</string>
+    <string name="barrio">Barrio</string>
+    <string name="parroquia">Parroquia</string>
+    <string name="general_state">Estado General</string>
+    <string name="normativa">Normativa</string>
+    <string name="comment">Comentario</string>
+    <string name="inventory">Inventario</string>
+    <string name="photo">Fotos</string>
+
+    <string name="label_photo_select">Seleccionar desde</string>
+    <string name="variation">Variación</string>
+    <string name="complementary_information">Información Complementaria</string>
+    <string name="equipment">Equipo</string>
+    <string name="add_element">Añadir Elemento</string>
+    <array name="photo_select">
+        <item>Tomar fotografía</item>
+        <item>Escoger desde galería</item>
+    </array>
+
+
+</resources>
