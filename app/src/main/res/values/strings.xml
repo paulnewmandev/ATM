@@ -25,10 +25,7 @@
         completions."
     </string>
 
-    <string
-        name="google_maps_key"
-        templateMergeStrategy="preserve"
-        translatable="false">AIzaSyAs9TeSnQi6y3kjc0-U6V-aYpMuxPCkOzc
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAs9TeSnQi6y3kjc0-U6V-aYpMuxPCkOzc
     </string>
 
     <!-- #############################   Error labels   #####################################-->
@@ -64,6 +61,15 @@
     <string name="complementary_information">Información Complementaria</string>
     <string name="equipment">Equipo</string>
     <string name="add_element">Añadir Elemento</string>
+    <string name="title_get_data">Consultando información</string>
+    <string name="content_get_data">Por favor espere mientras se consulta la información al servidor</string>
+    <string name="sure_delete">¿Seguro que desea eliminar el registro definitivamente?</string>
+    <string name="deleting_data">Borrando registro, por favor espere</string>
+    <string name="title_send_data">Enviando información</string>
+    <string name="content_send_data">Por favor espere mientras se envian los datos al servidor</string>
+    <string name="error_empty_location">Disculpe debe selecciona un aubicación válida en el mapa</string>
+    <string name="register_Success">¡Registro exitoso!</string>
+    <string name="register_error">Error al crear el registro, por favor verifique los datos o consulte a la administración</string>
     <array name="photo_select">
         <item>Tomar fotografía</item>
         <item>Escoger desde galería</item>

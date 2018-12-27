@@ -41,6 +41,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -281,10 +282,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private void login(String username, String password){
-        String mUrl = ApiUtils.API_URL;
+        String mUrl = ApiUtils.API_URL + ApiUtils.LOGIN;
         RequestParams mParams = new RequestParams();
-        mParams.put(ApiUtils.ACTION, ApiUtils.actions.login.name());
-        mParams.put(ApiUtils.parameters.username.name(), username);
+        mParams.put(ApiUtils.parameters.user.name(), username);
         mParams.put(ApiUtils.parameters.password.name(), password);
         AsyncHttpClient mClient = new AsyncHttpClient();
         mClient.post(mUrl, mParams, new BaseJsonHttpResponseHandler() {
@@ -292,27 +292,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, Object response) {
                 showProgress(false);
                 try {
-                    JSONObject mJson = new JSONObject(rawJsonResponse);
-                    if(mJson.has(ApiUtils.responses.JWT.name())){
-                        Prefs.with(mContext).save(SessionUtils.prefs.jwt.name(), mJson.getString(ApiUtils.responses.JWT.name()));
-                        startActivity(new Intent(mContext, MainActivity.class));
-                        finish();
-                    }else{
-                        Toast.makeText(mContext, getString(R.string.error_data_received), Toast.LENGTH_LONG).show();
-                    }
+                    JSONArray mArray = new JSONArray(rawJsonResponse);
+                    Prefs.with(mContext).save(SessionUtils.prefs.user_data.name(), mArray.getString(0));
+                    startActivity(new Intent(mContext, MainActivity.class));
+                    finish();
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(mContext, getString(R.string.error_json), Toast.LENGTH_LONG).show();
                 }
-                //startActivity(new Intent(mContext, MainActivity.class));
-                //finish();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, Object errorResponse) {
                 showProgress(false);
-                //startActivity(new Intent(mContext, MainActivity.class));
-                //finish();
                 Toast.makeText(mContext, getString(R.string.error_server), Toast.LENGTH_LONG).show();
             }
 

@@ -15,12 +15,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.ap.atm.R;
+import com.ap.atm.utils.ApiUtils;
 import com.ap.atm.utils.DialogUtils;
+import com.ap.atm.utils.SessionUtils;
 
 import me.alexrs.prefs.lib.Prefs;
 
@@ -58,6 +60,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View v = navigationView.getHeaderView(0);
+        TextView mNameUser = v.findViewById(R.id.headerUserName);
+        TextView mCharName = v.findViewById(R.id.headerCharName);
+        mNameUser.setText(SessionUtils.getUser(mContext).name);
+        mCharName.setText(SessionUtils.getUser(mContext).name.substring(0,1));
         initViews();
 
     }
@@ -104,9 +111,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_profile) {
             // Handle the camera action
         } else if (id == R.id.nav_signal) {
-            startActivity(new Intent(MainActivity.this, PortraitSignalActivity.class));
+            startActivity(new Intent(MainActivity.this, SignalsActivity.class));
         } else if (id == R.id.nav_semaforo) {
-            startActivity(new Intent(MainActivity.this, SemaphoreActivity.class));
+            startActivity(new Intent(MainActivity.this, SemaphoresActivity.class));
         } else if (id == R.id.nav_orders) {
 
         } else if (id == R.id.nav_exit) {
@@ -131,6 +138,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mCardSemaforo.setOnClickListener(this);
         mCardConsultas.setOnClickListener(this);
         mCardOrdenes.setOnClickListener(this);
+
+        ApiUtils.getDatas(mContext);
     }
 
     private void dialogExit(){
@@ -154,10 +163,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.mCardSignal:
-                startActivity(new Intent(MainActivity.this, PortraitSignalActivity.class));
+                startActivity(new Intent(MainActivity.this, SignalsActivity.class));
                 break;
             case R.id.mCardSemaforo:
-                startActivity(new Intent(MainActivity.this, SemaphoreActivity.class));
+                startActivity(new Intent(MainActivity.this, SemaphoresActivity.class));
                 break;
             case R.id.mCardConsultas:
 

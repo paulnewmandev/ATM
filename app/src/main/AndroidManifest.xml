@@ -10,17 +10,18 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <uses-feature android:name="android.hardware.camera"
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
 
     <application
+        android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name="android.support.multidex.MultiDexApplication" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".ui.activities.MainActivity"
             android:label="@string/app_name"
@@ -38,8 +39,8 @@
             android:name=".ui.activities.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.activities.PortraitSignalActivity" />
-        <activity android:name=".ui.activities.SemaphoreActivity"/>
+        <activity android:name=".ui.activities.AddPortraitSignalActivity" />
+        <activity android:name=".ui.activities.AddSemaphoreActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -54,6 +55,9 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
+        <activity android:name=".ui.activities.SignalsActivity" />
+        <activity android:name=".ui.activities.SemaphoresActivity"></activity>
     </application>
 
 </manifest>

@@ -24,7 +24,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(Prefs.with(getApplicationContext()).getString(SessionUtils.prefs.jwt.name(), "").isEmpty()){
+                if(Prefs.with(getApplicationContext()).getString(SessionUtils.prefs.user_data.name(), "").isEmpty()){
                     startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                     finish();
                 }else{

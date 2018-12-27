@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_take_picture"
+        android:icon="@drawable/camera"
+        android:title="Tomar Foto"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_take_location"
+        android:icon="@drawable/map_marker_plus"
+        android:title="Tomar Foto"
+        app:showAsAction="always" />
+</menu>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:padding="20dp"
-    tools:context="com.ap.atm.ui.activities.PortraitSignalActivity">
+    tools:context="com.ap.atm.ui.activities.AddPortraitSignalActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,38 +18,67 @@
             android:orientation="vertical"
             android:padding="10dp">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:text="Ubicación"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
             <LinearLayout
-                android:id="@+id/mSemaphoreReqPicture"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="@string/photo"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/mSemaphoreInpLatitude"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
-                <ImageView
-                    android:id="@+id/mSemPicReq"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="?android:attr/selectableItemBackground"
-                    app:srcCompat="@drawable/ic_photo_req" />
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:hint="Latitud"
+                        android:text=" " />
+                </android.support.design.widget.TextInputLayout>
 
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/mSemaphoreInpLongitude"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:hint="Longitud"
+                        android:text=" " />
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/mSemaphoreInpGoogleAddress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:hint="Direccion Google"
+                    android:text=" " />
+            </android.support.design.widget.TextInputLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="General"
-                android:textSize="25sp"
+                android:layout_margin="2dp"
+                android:text="Dirección"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -67,8 +96,7 @@
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/street_1"
-                        android:textSize="30sp" />
+                        android:hint="@string/street_1" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -81,8 +109,7 @@
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/street_2"
-                        android:textSize="30sp" />
+                        android:hint="@string/street_2" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
@@ -101,8 +128,7 @@
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/barrio"
-                        android:textSize="30sp" />
+                        android:hint="@string/barrio" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -115,8 +141,7 @@
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/parroquia"
-                        android:textSize="30sp" />
+                        android:hint="@string/parroquia" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
@@ -128,9 +153,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Ubicación"
-                android:textSize="25sp"
+                android:layout_margin="2dp"
+                android:text="Caracteristicas"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -189,36 +214,66 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/mSemaphoreAddElement"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_margin="2dp"
                 android:drawableLeft="@drawable/ic_plus_file"
                 android:drawablePadding="5dp"
                 android:gravity="center_vertical"
-                android:text="Elementos"
-                android:textSize="25sp"
+                android:text="Elemento"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/mSemaphoreInpElementos"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-                <android.support.design.widget.TextInputEditText
+                <Spinner
+                    android:id="@+id/mSemaphoreSpnElement"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/add_element"
-                    android:textSize="30sp" />
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_weight="1" />
+
+                <Spinner
+                    android:id="@+id/mSemaphoreSpnType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/mSemaphoreSpnStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <Spinner
+                    android:id="@+id/mSemaphoreSpnDirection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/mSemaphoreRecyclerElements"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_margin="2dp"
                 android:text="Comentarios"
-                android:textSize="25sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <android.support.design.widget.TextInputLayout
@@ -230,8 +285,7 @@
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/inventory"
-                    android:textSize="30sp" />
+                    android:hint="@string/inventory" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -242,8 +296,7 @@
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/comment"
-                    android:textSize="30sp" />
+                    android:hint="@string/comment" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -254,18 +307,31 @@
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/equipment"
-                    android:textSize="30sp" />
+                    android:hint="@string/equipment" />
             </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:text="Imágenes Agregadas"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/mSemaphoreRecyclerImages"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <Button
                 android:id="@+id/mSemaphoreBtnSave"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
                 android:background="@color/colorAccent"
                 android:text="@string/save"
-                android:textColor="@android:color/white"
-                android:textSize="30sp" />
+                android:textColor="@android:color/white" />
         </LinearLayout>
     </ScrollView>
 </android.support.design.widget.CoordinatorLayout>

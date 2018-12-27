@@ -7,4 +7,5 @@
     <color name="border">#F5F5F5</color>
     <color name="primary_text">#fff</color>
     <color name="primaryATM">#3F51B5</color>
+    <color name="colorWhite">#fff</color>
 </resources>
