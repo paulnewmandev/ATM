@@ -11,10 +11,7 @@ public class IntersectionModel implements Serializable {
     public int id;
     public String main_st;
     public String cross_st;
-    public float latitude;
-    public float longitude;
-    public String reference;
-    public String updated_at;
+    public float distancia;
 
     public IntersectionModel() {
     }

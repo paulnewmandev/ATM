@@ -83,7 +83,7 @@ public class SessionUtils {
         List<String> mList = new ArrayList<>();
         if(getIntersections(mContext) != null){
             for(IntersectionModel mModel : getIntersections(mContext)){
-                mList.add(mModel.main_st);
+                mList.add(mModel.main_st+", "+mModel.cross_st);
             }
         }
         return mList;

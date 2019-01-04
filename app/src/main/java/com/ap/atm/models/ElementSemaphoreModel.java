@@ -9,10 +9,15 @@ import java.util.List;
  */
 
 public class ElementSemaphoreModel implements Serializable {
-    public String elemento;
-    public String tipo;
+    public int id;
+    public int traffic_light_id;
+    public String element;
+    public String type_element_id;
     public int status;
-    public int direccion;
+    public int direction;
+    public String inventory;
+    public String updated_at;
+    public int user_id;
 
     public ElementSemaphoreModel() {
     }

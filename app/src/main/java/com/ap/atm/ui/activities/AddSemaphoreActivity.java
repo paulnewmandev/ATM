@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,15 +28,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.ap.atm.R;
 import com.ap.atm.models.DirectionModel;
-import com.ap.atm.models.ElementModel;
 import com.ap.atm.models.ElementSemaphoreModel;
 import com.ap.atm.models.ImageModel;
-import com.ap.atm.models.IntersectionModel;
 import com.ap.atm.models.SemaphoreModel;
-import com.ap.atm.models.SerieModel;
 import com.ap.atm.models.TypesElements;
 import com.ap.atm.ui.adapters.ElementsAdapter;
 import com.ap.atm.ui.adapters.ImagesAdapter;
@@ -48,7 +47,6 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -153,6 +151,8 @@ public class AddSemaphoreActivity extends AppCompatActivity {
     private ArrayAdapter<String> mStatusAdapter;
     private ArrayAdapter<String> mDirectionsAdapter;
 
+    private String mLabelResult = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,11 +178,14 @@ public class AddSemaphoreActivity extends AppCompatActivity {
             Place place = PlacePicker.getPlace(mContext, intent);
             DecimalFormat df = new DecimalFormat("#.######");
             df.setRoundingMode(RoundingMode.CEILING);
-            mLatitude.getEditText().setText(df.format(place.getLatLng().latitude).replace(",", "."));
-            mLongitude.getEditText().setText(df.format(place.getLatLng().longitude).replace(",", "."));
+            String strLatitude = df.format(place.getLatLng().latitude).replace(",", ".");
+            String strLongitude = df.format(place.getLatLng().longitude).replace(",", ".");
+            mLatitude.getEditText().setText(strLatitude);
+            mLongitude.getEditText().setText(strLongitude);
             mGoogleAddress.getEditText().setText(place.getAddress());
+            getIntersections(strLatitude, strLongitude);
         }else if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK){
-            Toast.makeText(mContext, mCurrentPhotoPath, Toast.LENGTH_LONG).show();
+            //Toast.makeText(mContext, mCurrentPhotoPath, Toast.LENGTH_LONG).show();
             File image = new File(mCurrentPhotoPath);
             Bitmap mBitmap = BitmapFactory.decodeFile(image.getAbsolutePath());
             mListImages.add(new ImageModel(mCurrentPhotoPath, mBitmap));
@@ -195,7 +198,7 @@ public class AddSemaphoreActivity extends AppCompatActivity {
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             mCurrentPhotoPath = cursor.getString(columnIndex);
             cursor.close();
-            Toast.makeText(mContext, mCurrentPhotoPath, Toast.LENGTH_LONG).show();
+            //Toast.makeText(mContext, mCurrentPhotoPath, Toast.LENGTH_LONG).show();
             File image = new File(mCurrentPhotoPath);
             Bitmap mBitmap = BitmapFactory.decodeFile(image.getAbsolutePath());
             mListImages.add(new ImageModel(mCurrentPhotoPath, mBitmap));
@@ -252,12 +255,8 @@ public class AddSemaphoreActivity extends AppCompatActivity {
 
         //Elementos Views
         mAddElemento = findViewById(R.id.mSemaphoreAddElement);
-        mSpinElement = findViewById(R.id.mSemaphoreSpnElement);
-        mSpinType = findViewById(R.id.mSemaphoreSpnType);
-        mSpinStatus = findViewById(R.id.mSemaphoreSpnStatus);
-        mSpinDirection = findViewById(R.id.mSemaphoreSpnDirection);
         mRecyclerElements = findViewById(R.id.mSemaphoreRecyclerElements);
-        mRecyclerElementsAdapter = new ElementsAdapter(mContext, mListElementsObjects);
+        mRecyclerElementsAdapter = new ElementsAdapter(mContext, mListElementsObjects, false);
 
         //Comentarios Views
         mInventario = findViewById(R.id.mSemaphoreInpInventario);
@@ -274,11 +273,11 @@ public class AddSemaphoreActivity extends AppCompatActivity {
     }
 
     private void initActivity(){
-        if(!Prefs.with(mContext).getString(SessionUtils.prefs.intersections.name(), "").isEmpty()){
-            showIntersections();
-        }else{
-            getIntersections();
-        }
+        //if(!Prefs.with(mContext).getString(SessionUtils.prefs.intersections.name(), "").isEmpty()){
+        //    showIntersections();
+        //}else{
+        //    getIntersections();
+        //}
 
         if(!Prefs.with(mContext).getString(SessionUtils.prefs.marcas.name(), "").isEmpty()){
             showMarcas();
@@ -317,46 +316,16 @@ public class AddSemaphoreActivity extends AppCompatActivity {
             getArmarios();
         }
 
-        showElements();
+        //showElements();
 
-        if(!Prefs.with(mContext).getString(SessionUtils.prefs.states.name(), "").isEmpty()){
-            showEstados();
-        }
-        else{
+        if(Prefs.with(mContext).getString(SessionUtils.prefs.states.name(), "").isEmpty()){
             getEstados();
         }
-
-        showDirections();
-
-        mSpinElement.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                showTypeElement(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         mAddElemento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mSpinStatus.getSelectedItemPosition() == 0){
-                    Toast.makeText(mContext, "Debe indicar el estado del elemento", Toast.LENGTH_LONG).show();
-                }else if(mSpinDirection.getSelectedItemPosition() == 0){
-                    Toast.makeText(mContext, "Debe indicar la dirección del elemento", Toast.LENGTH_LONG).show();
-                }else{
-                    ElementSemaphoreModel mModel = new ElementSemaphoreModel();
-                    mModel.elemento = ElementSemaphoreModel.mIdElement(mSpinElement.getSelectedItemPosition());
-                    mModel.tipo = TypesElements.getIdElement(mSpinElement.getSelectedItemPosition()+1, mSpinType.getSelectedItemPosition());
-                    mModel.status = mSpinStatus.getSelectedItemPosition();
-                    mModel.direccion = mSpinDirection.getSelectedItemPosition();
-                    mListElementsObjects.add(mModel);
-                    mElementsAdapter.notifyDataSetChanged();
-
-                }
+                dialogAddElement();
             }
         });
 
@@ -366,7 +335,7 @@ public class AddSemaphoreActivity extends AppCompatActivity {
         mRecyclerElements.setAdapter(mRecyclerElementsAdapter);
 
         LinearLayoutManager llm2 = new LinearLayoutManager(mContext);
-        llm.setOrientation(LinearLayoutManager.HORIZONTAL);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerImages.setLayoutManager(llm2);
         mRecyclerImages.setAdapter(mRecyclerImagesAdapter);
 
@@ -382,7 +351,7 @@ public class AddSemaphoreActivity extends AppCompatActivity {
 
         if(getIntent() != null){
             if(getIntent().hasExtra(SessionUtils.params.semaphore.name())){
-                getSupportActionBar().setTitle("EDITAR "+getString(R.string.signal_vertical));
+                getSupportActionBar().setTitle("EDITAR "+getString(R.string.semaforo));
                 loadSemaphore();
             }
         }
@@ -468,20 +437,25 @@ public class AddSemaphoreActivity extends AppCompatActivity {
         return image;
     }
 
-    private void getIntersections(){
-        String mUrl = ApiUtils.API_URL + ApiUtils.GET_INTERSECTIONS;
-        new AsyncHttpClient().get(mUrl, new BaseJsonHttpResponseHandler() {
+    private void getIntersections(String latitude, String longitude){
+        final MaterialDialog mDialog = DialogUtils.showProgress(mContext, getString(R.string.title_get_data),
+                getString(R.string.content_get_data));
+        String mUrl = ApiUtils.API_URL + ApiUtils.VIEW_INTERSECTIONS;
+        RequestParams mParams = new RequestParams();
+        mParams.put("latitude", latitude);
+        mParams.put("longitude", longitude);
+        new AsyncHttpClient().post(mUrl, mParams, new BaseJsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, Object response) {
-                if(!Prefs.with(mContext).getString(SessionUtils.prefs.intersections.name(), "").contentEquals(rawJsonResponse)){
-                    Prefs.with(mContext).save(SessionUtils.prefs.intersections.name(), rawJsonResponse);
-                    showIntersections();
-                }
+                mDialog.dismiss();
+                Prefs.with(mContext).save(SessionUtils.prefs.intersections.name(), rawJsonResponse);
+                showIntersections();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, Object errorResponse) {
-
+                mDialog.dismiss();
+                Toast.makeText(mContext, "Error al obtener intersecciones", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -751,7 +725,6 @@ public class AddSemaphoreActivity extends AppCompatActivity {
                     }while (found);
                     if(mListAux.size() > 0 && !Prefs.with(mContext).getString(SessionUtils.prefs.states.name(), "").contentEquals(new Gson().toJson(mListAux))){
                         Prefs.with(mContext).save(SessionUtils.prefs.states.name(), new Gson().toJson(mListAux));
-                        showEstados();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -824,6 +797,17 @@ public class AddSemaphoreActivity extends AppCompatActivity {
         mListElements = ElementSemaphoreModel.mElements();
         mElementsAdapter = new ArrayAdapter<>(mContext, R.layout.item_spinner, mListElements);
         mSpinElement.setAdapter(mElementsAdapter);
+        mSpinElement.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                showTypeElement(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         showTypeElement(0);
     }
 
@@ -886,9 +870,11 @@ public class AddSemaphoreActivity extends AppCompatActivity {
             return false;
         }
 
-        if(mSpinnInterseccion.getSelectedItemPosition() == 0){
-            Toast.makeText(mContext, "Debe seleccionar una intersección válida", Toast.LENGTH_LONG).show();
-            return false;
+        if(mListIntersections.size() > 1){
+            if(mSpinnInterseccion.getSelectedItemPosition() == 0){
+                Toast.makeText(mContext, "Debe seleccionar una intersección válida", Toast.LENGTH_LONG).show();
+                return false;
+            }
         }
 
         if(mSpinMarca.getSelectedItemPosition() == 0){
@@ -974,14 +960,18 @@ public class AddSemaphoreActivity extends AppCompatActivity {
         mParams.put(ApiUtils.parameters.street2.name(), FormUtils.sanitazeInput(mStreet2));
         mParams.put(ApiUtils.parameters.neighborhood.name(), FormUtils.sanitazeInput(mBarrio));
         mParams.put(ApiUtils.parameters.parish.name(), FormUtils.sanitazeInput(mParroquia));
-        mParams.put(ApiUtils.parameters.intersectios_id.name(), SessionUtils.getIntersections(mContext).get(mSpinnInterseccion.getSelectedItemPosition()-1).id);
+        if(mListIntersections.size() > 1){
+            mParams.put(ApiUtils.parameters.intersectios_id.name(), SessionUtils.getIntersections(mContext).get(mSpinnInterseccion.getSelectedItemPosition()-1).id);
+        }else{
+            mParams.put(ApiUtils.parameters.intersectios_id.name(), 0);
+        }
         mParams.put(ApiUtils.parameters.brand.name(), mSpinMarca.getSelectedItemPosition()-1);
         mParams.put(ApiUtils.parameters.groups.name(), mSpinGrupo.getSelectedItemPosition()-1);
         mParams.put(ApiUtils.parameters.regulator.name(), mSpinRegulador.getSelectedItemPosition()-1);
         mParams.put(ApiUtils.parameters.source.name(), mSpinFuente.getSelectedItemPosition()-1);
         mParams.put(ApiUtils.parameters.ups.name(), mSpinUps.getSelectedItemPosition()-1);
         mParams.put(ApiUtils.parameters.closet.name(), mSpinArmario.getSelectedItemPosition()-1);
-        mParams.put(ApiUtils.parameters.elements.name(), new Gson().toJson(mListElementsObjects));
+        mParams.put(ApiUtils.parameters.elements.name(), "[]");
         mParams.put(ApiUtils.parameters.commentary.name(), FormUtils.sanitazeInput(mComentario));
         for(ImageModel mModel : mListImages){
             try {
@@ -996,11 +986,15 @@ public class AddSemaphoreActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, Object response) {
                 mDialog.dismiss();
+                mLabelResult = "";
                 try {
                     JSONObject mJson = new JSONObject(rawJsonResponse);
                     if(mJson.getString("Status").contentEquals("OK")){
                         Toast.makeText(mContext, "Semaforo agregado exitosamente", Toast.LENGTH_LONG).show();
-                        finish();
+                        mLabelResult+="<b>Id de Semaforo: </b> "+mJson.getString(ApiUtils.responses.id_semaforo.name())+"<br/>";
+                        mLabelResult+="<b>Elementos: </b> <br/>";
+                        createElements(mJson.getInt(ApiUtils.responses.id.name()));
+                        //finish();
                     }else{
                         Toast.makeText(mContext, "Error al crear semaforo", Toast.LENGTH_LONG).show();
                     }
@@ -1024,6 +1018,60 @@ public class AddSemaphoreActivity extends AppCompatActivity {
         });
     }
 
+    private void createElements(int idSemaphore){
+        final MaterialDialog mDialog = DialogUtils.showProgress(mContext, "Agregando Elementos", "Por favor espere mientras se agregan los elementos asociados al semaforo");
+        final int[] count = {0};
+        String mUrl = ApiUtils.API_URL+ApiUtils.ADD_ELEMENT;
+        for(ElementSemaphoreModel mModel : mListElementsObjects){
+            if(mModel.id == 0){
+                RequestParams mParams = new RequestParams();
+                mParams.put(ApiUtils.parameters.id.name(), idSemaphore);
+                mParams.put(ApiUtils.parameters.elemento.name(), mModel.element);
+                mParams.put(ApiUtils.parameters.tipo.name(), mModel.type_element_id);
+                mParams.put(ApiUtils.parameters.status.name(), mModel.status);
+                mParams.put(ApiUtils.parameters.direccion.name(), mModel.direction);
+                mParams.put(ApiUtils.parameters.user_id.name(), SessionUtils.getUser(mContext).id);
+                new AsyncHttpClient().post(mUrl, mParams, new BaseJsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, Object response) {
+                        Log.d("Resp. Add Element", rawJsonResponse);
+                        try{
+                            JSONObject mJson = new JSONObject(rawJsonResponse);
+                            int element = count[0]+1;
+                            mLabelResult+="<b>Elemento "+element+": </b> "+mJson.getString(ApiUtils.responses.id_nventario.name())+"<br/>";
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if(count[0] == mListElementsObjects.size()-1){
+                            mDialog.dismiss();
+                            final MaterialDialog mDialog2 = DialogUtils.showDialogConfirm(mContext, "Resultado", Html.fromHtml(mLabelResult));
+                            mDialog2.getActionButton(DialogAction.POSITIVE).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    mDialog2.dismiss();
+                                    finish();
+                                }
+                            });
+                        }
+                        count[0]++;
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, Object errorResponse) {
+                        mDialog.dismiss();
+                        Toast.makeText(mContext, getString(R.string.error_server), Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    protected Object parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                        return null;
+                    }
+                });
+            }
+        }
+    }
+
     private void loadSemaphore(){
         SemaphoreModel mModel = (SemaphoreModel) getIntent().getSerializableExtra(SessionUtils.params.semaphore.name());
         mLatitude.getEditText().setText(String.valueOf(mModel.latitude));
@@ -1040,17 +1088,75 @@ public class AddSemaphoreActivity extends AppCompatActivity {
         mSpinFuente.setSelection(mModel.source);
         mSpinUps.setSelection(mModel.ups);
         mSpinArmario.setSelection(mModel.closet);
-        try {
-            Type mDataType = new TypeToken<List<ElementSemaphoreModel>>() {}.getType();
-            mListElementsObjects = new Gson().fromJson(mModel.elements, mDataType);
-            mRecyclerElementsAdapter = new ElementsAdapter(mContext, mListElementsObjects);
-            mRecyclerElements.setAdapter(mRecyclerElementsAdapter);
-        }catch (JsonSyntaxException e){
-            Log.d("Error", "Json Parser Error");
-        }
+        getElements(mModel.id);
         mInventario.getEditText().setText(mModel.inventory);
         mComentario.getEditText().setText(mModel.commentary);
         mEquipo.getEditText().setText(mModel.equipment);
 
+    }
+
+    private void getElements(int idSemaphore){
+        final MaterialDialog mDialog = DialogUtils.showProgress(mContext, "Obteniendo elementos", null);
+        String mUrl = ApiUtils.API_URL+"getElementosView/"+idSemaphore;
+        new AsyncHttpClient().get(mUrl, new BaseJsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, Object response) {
+                mDialog.dismiss();
+                Type mDataType = new TypeToken<List<ElementSemaphoreModel>>() {}.getType();
+                mListElementsObjects = new Gson().fromJson(rawJsonResponse, mDataType);
+                mRecyclerElementsAdapter = new ElementsAdapter(mContext, mListElementsObjects, true);
+                mRecyclerElements.setAdapter(mRecyclerElementsAdapter);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, Object errorResponse) {
+                mDialog.dismiss();
+            }
+
+            @Override
+            protected Object parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return null;
+            }
+        });
+    }
+
+    private void dialogAddElement(){
+        final MaterialDialog mDialog = DialogUtils.showCustomAcceptCancelDialog(mContext, "Agregar Elemento", R.layout.dialog_add_element);
+        View v = mDialog.getCustomView();
+        mSpinElement = v.findViewById(R.id.mSemaphoreSpnElement);
+        mSpinType = v.findViewById(R.id.mSemaphoreSpnType);
+        mSpinStatus = v.findViewById(R.id.mSemaphoreSpnStatus);
+        mSpinDirection = v.findViewById(R.id.mSemaphoreSpnDirection);
+        showElements();
+        showDirections();
+        showEstados();
+
+        mDialog.getActionButton(DialogAction.POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mSpinStatus.getSelectedItemPosition() == 0){
+                    Toast.makeText(mContext, "Debe indicar el estado del element", Toast.LENGTH_LONG).show();
+                }else if(mSpinDirection.getSelectedItemPosition() == 0){
+                    Toast.makeText(mContext, "Debe indicar la dirección del element", Toast.LENGTH_LONG).show();
+                }else{
+                    ElementSemaphoreModel mModel = new ElementSemaphoreModel();
+                    mModel.id = 0;
+                    mModel.element = ElementSemaphoreModel.mIdElement(mSpinElement.getSelectedItemPosition());
+                    mModel.type_element_id = TypesElements.getIdElement(mSpinElement.getSelectedItemPosition()+1, mSpinType.getSelectedItemPosition());
+                    mModel.status = mSpinStatus.getSelectedItemPosition();
+                    mModel.direction = mSpinDirection.getSelectedItemPosition();
+                    mListElementsObjects.add(mModel);
+                    mElementsAdapter.notifyDataSetChanged();
+                    mDialog.dismiss();
+                }
+            }
+        });
+
+        mDialog.getActionButton(DialogAction.NEGATIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDialog.dismiss();
+            }
+        });
     }
 }

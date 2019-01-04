@@ -8,4 +8,5 @@
     <color name="primary_text">#fff</color>
     <color name="primaryATM">#3F51B5</color>
     <color name="colorWhite">#fff</color>
+    <color name="black">#000</color>
 </resources>

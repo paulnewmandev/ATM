@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +29,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.ap.atm.R;
 import com.ap.atm.models.CategoryModel;
@@ -61,6 +63,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.math.RoundingMode;
@@ -1133,8 +1136,14 @@ public class AddPortraitSignalActivity extends AppCompatActivity {
         mParams.put(ApiUtils.parameters.is_horizontal.name(), value);
         mParams.put(ApiUtils.parameters.commentary.name(), FormUtils.sanitazeInput(mComentarios));
         mParams.put(ApiUtils.parameters.inventory.name(), "");
-
-        //Falta agregar imagenes en los parametros
+        for(ImageModel mModel : mListImages){
+            try {
+                mParams.put(ApiUtils.parameters.photographs.name()+"[]", new File(mModel.urlPath));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Log.d("Error_image", "Error al crear archivo de imagen");
+            }
+        }
 
         new AsyncHttpClient().post(mUrl, mParams, new BaseJsonHttpResponseHandler() {
             @Override
@@ -1144,8 +1153,17 @@ public class AddPortraitSignalActivity extends AppCompatActivity {
                 try {
                     JSONObject mJson = new JSONObject(rawJsonResponse);
                     if(mJson.getString("Status").contentEquals("OK")){
+                        String mLabelResult = "<b>Id Señal vertical: </b> "+mJson.getString("id");
+                        final MaterialDialog mDialog2 = DialogUtils.showDialogConfirm(mContext, "Resultado", Html.fromHtml(mLabelResult));
+                        mDialog2.getActionButton(DialogAction.POSITIVE).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mDialog2.dismiss();
+                                finish();
+                            }
+                        });
                         Toast.makeText(mContext, getString(R.string.register_Success), Toast.LENGTH_LONG).show();
-                        finish();
+                        //finish();
                     }else{
                         Toast.makeText(mContext, getString(R.string.register_error), Toast.LENGTH_LONG).show();
                     }
@@ -1199,6 +1217,5 @@ public class AddPortraitSignalActivity extends AppCompatActivity {
         if(mModel.is_horizontal == 1) mChecInformation.setChecked(true);
         mComentarios.getEditText().setText(mModel.commentary);
     }
-
 
 }

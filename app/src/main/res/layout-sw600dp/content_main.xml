@@ -36,13 +36,12 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/border_background"
-                    android:orientation="vertical"
-                    android:padding="3dp">
+                    android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/imageView4"
                         android:layout_width="match_parent"
-                        android:layout_height="300dp"
+                        android:layout_height="250dp"
                         android:layout_weight="1"
                         android:padding="3dp"
                         app:srcCompat="@drawable/btn_senal" />
@@ -56,7 +55,7 @@
                         android:padding="3dp"
                         android:text="@string/signal_vertical"
                         android:textAlignment="center"
-                        android:textSize="25sp" />
+                        android:textSize="20sp" />
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -81,7 +80,7 @@
                     <ImageView
                         android:id="@+id/imageView7"
                         android:layout_width="match_parent"
-                        android:layout_height="300dp"
+                        android:layout_height="250dp"
                         android:layout_weight="1"
                         android:padding="3dp"
                         app:srcCompat="@drawable/btn_semaforo" />
@@ -95,7 +94,7 @@
                         android:padding="3dp"
                         android:text="@string/semaforo"
                         android:textAlignment="center"
-                        android:textSize="25sp" />
+                        android:textSize="20sp" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -127,7 +126,7 @@
                     <ImageView
                         android:id="@+id/imageView5"
                         android:layout_width="match_parent"
-                        android:layout_height="300dp"
+                        android:layout_height="250dp"
                         android:layout_weight="1"
                         android:padding="3dp"
                         app:srcCompat="@drawable/btn_lupa" />
@@ -141,7 +140,7 @@
                         android:padding="3dp"
                         android:text="@string/consultas"
                         android:textAlignment="center"
-                        android:textSize="25sp" />
+                        android:textSize="20sp" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -165,7 +164,7 @@
                     <ImageView
                         android:id="@+id/imageView6"
                         android:layout_width="match_parent"
-                        android:layout_height="300dp"
+                        android:layout_height="250dp"
                         android:layout_weight="1"
                         android:padding="3dp"
                         app:srcCompat="@drawable/btn_ordenes" />
@@ -179,7 +178,7 @@
                         android:padding="3dp"
                         android:text="@string/order_works"
                         android:textAlignment="center"
-                        android:textSize="25sp" />
+                        android:textSize="20sp" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 

@@ -25,7 +25,7 @@ import me.alexrs.prefs.lib.Prefs;
 public class ApiUtils {
 
     //public static String API_URL = "https://atm.gotopdev.com/atmapi/public/";
-    public static String API_URL = "https://atm.gotopdev.com/atmapi/public/";
+    public static String API_URL = "http://atmdev.info/atmapi/public/";
     public static String ACTION = "action";
     //////--------ACTIONS-----//////
     public static String LOGIN = "login";
@@ -49,6 +49,8 @@ public class ApiUtils {
     public static String EDIT_SEMAFORO = "editSemaforos";
     public static String DELETE_SEMAFORO = "deleteSemaforo";
     public static String GET_INTERSECTIONS = "getIntersectionsAll";
+    public static String VIEW_INTERSECTIONS = "viewIntersectionsDistance";
+    public static String ADD_ELEMENT = "addElemento";
 
 
     public enum codes {
@@ -101,16 +103,19 @@ public class ApiUtils {
         inventory,
         //photographs,
 
+        //AddElemets
+        id, elemento, tipo, status, direccion, //user_id
+
         action, code
     }
 
     public enum responses {
-        JWT, records
+        JWT, records, id, id_semaforo, id_inventario, Status, id_nventario
     }
 
     public static void getDatas(Context mContext){
         //Semaphores
-        getIntersections(mContext);
+        //getIntersections(mContext);
         getMarcas(mContext);
         getGrupos(mContext);
         getReguladores(mContext);

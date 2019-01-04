@@ -2,6 +2,7 @@ package com.ap.atm.utils;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.text.Html;
 import android.text.Spanned;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -61,11 +62,13 @@ public class DialogUtils {
     }
 
     public static MaterialDialog showDialogConfirm(Context mCon, String mTitle,
-                                                   String mContent){
+                                                   Spanned mContent){
         return new MaterialDialog.Builder(mCon)
                 .title(mTitle)
                 .content(mContent)
-                .contentColorRes(R.color.primary_text)
+                .contentColorRes(R.color.black)
+                .cancelable(false)
+                .autoDismiss(false)
                 .positiveText(R.string.accept)
                 .positiveColorRes(R.color.primaryATM)
                 .onPositive(new MaterialDialog.SingleButtonCallback() {

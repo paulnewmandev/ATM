@@ -13,6 +13,26 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">58sp</item>
+    </style>
+
+    <style name="TextLabelStyle" parent="android:Widget.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_margin">@dimen/label_margin</item>
+        <item name="android:textSize">@dimen/label_size</item>
+    </style>
+
+    <style name="InputTextStyle" parent="android:Widget.EditText">
+        <item name="android:textSize">@dimen/input_text_size</item>
+    </style>
+
+    <style name="LabelInputTextStyle" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/input_label_size</item>
+    </style>
+
+
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
