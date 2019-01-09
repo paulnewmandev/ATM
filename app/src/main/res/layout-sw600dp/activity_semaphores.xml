@@ -8,10 +8,15 @@
     android:fitsSystemWindows="true"
     tools:context="com.ap.atm.ui.activities.SemaphoresActivity">
 
+    <include
+        layout="@layout/simple_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/toolbar_size">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -20,7 +25,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/mRecyclerSemaphores"
@@ -30,3 +35,4 @@
         </ScrollView>
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
+

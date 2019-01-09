@@ -37,22 +37,22 @@
     <!-- ############################    Main Labels    #####################################-->
 
     <string name="signal_vertical">SEÑAL VERTICAL</string>
-    <string name="semaforo">SEMAFORO</string>
+    <string name="semaforo">SEMÁFORO</string>
     <string name="consultas">CONSULTAS</string>
-    <string name="order_works">ORDENES DE TRABAJO</string>
+    <string name="order_works">ÓRDENES DE TRABAJO</string>
     <string name="accept">Aceptar</string>
     <string name="cancel">Cancelar</string>
     <string name="confirm_title">Confirmar</string>
     <string name="confirm_loguot">¿Esta seguro de salir?</string>
     <string name="save">Guardar</string>
-    <string name="street_1">calle 1</string>
-    <string name="street_2">calle 2</string>
+    <string name="street_1">Calle Principal</string>
+    <string name="street_2">Calle Secundaria</string>
     <string name="identificacion">identificacion</string>
-    <string name="barrio">Barrio</string>
-    <string name="parroquia">Parroquia</string>
+    <string name="barrio">Barrio/Sector/Ciudadela</string>
+    <string name="parroquia">Parroquia/Zona</string>
     <string name="general_state">Estado General</string>
     <string name="normativa">Normativa</string>
-    <string name="comment">Comentario</string>
+    <string name="comment">Comentarios</string>
     <string name="inventory">Inventario</string>
     <string name="photo">Fotos</string>
 

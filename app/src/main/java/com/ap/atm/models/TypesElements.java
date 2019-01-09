@@ -16,6 +16,8 @@ public class TypesElements {
 
     public static List<String> mTypesVehicular(){
         List<String> mList = new ArrayList<>();
+        mList.add("SC - Ciclovia");
+        mList.add("SFT - Tren o tranvía");
         mList.add("S1 - 3/200");
         mList.add("S1B - 3/200 Bus");
         mList.add("S1G - 3/200 Giro");
@@ -46,24 +48,28 @@ public class TypesElements {
     public static String mIdTypeVehicular(int position){
         switch (position){
             case 0:
-                return "S1";
+                return "SC";
             case 1:
-                return "S1B";
+                return "SFT";
             case 2:
-                return "S1G";
+                return "S1";
             case 3:
-                return "S1D";
+                return "S1B";
             case 4:
-                return "S2";
+                return "S1G";
             case 5:
-                return "S2B";
+                return "S1D";
             case 6:
-                return "S2G";
+                return "S2";
             case 7:
-                return "S3";
+                return "S2B";
             case 8:
-                return "S3B";
+                return "S2G";
             case 9:
+                return "S3";
+            case 10:
+                return "S3B";
+            case 11:
                 return "S3G";
             default:
                 return "ND";
@@ -72,9 +78,9 @@ public class TypesElements {
 
     public static List<String> mTypesPeatonal(){
         List<String> mList = new ArrayList<>();
-        mList.add("S1PA - 200 Audible");
-        mList.add("S1P - 2/200");
-        mList.add("S2P - 2/300");
+        mList.add("PP - Pulsador peatonal");
+        mList.add("S1P - 2/200 peatonal");
+        mList.add("S3P - 3/300 peatonal");
         mList.add("Otro");
         return mList;
     }
@@ -82,7 +88,7 @@ public class TypesElements {
     public static String mIdTypePeatonal(int position){
         switch (position){
             case 0:
-                return "S1PA";
+                return "PP";
             case 1:
                 return "S1P";
             case 2:
@@ -94,52 +100,69 @@ public class TypesElements {
 
     public static List<String> mTypesMontaje(){
         List<String> mList = new ArrayList<>();
-        mList.add("Cable Tensor");
-        mList.add("Poste");
-        mList.add("T1");
-        mList.add("T2");
-        mList.add("T3");
-        mList.add("Otro");
+        mList.add("T1 - Báculo 4m SC");
+        mList.add("T2 - Báculo 4m CCA");
+        mList.add("T3 - Columna peatonal");
+        mList.add("CM - Otro complementario");
         return mList;
     }
 
     public static String mIdTypeMontaje(int position){
         switch (position){
             case 0:
-                return "4";
-            case 1:
-                return "5";
-            case 2:
                 return "T1";
-            case 3:
+            case 2:
                 return "T2";
-            case 4:
+            case 3:
                 return "T3";
             default:
-                return "ND";
+                return "CM";
         }
     }
 
     public static List<String> mTypesOtro(){
         List<String> mList = new ArrayList<>();
-        mList.add("Camara");
-        mList.add("Dispositivo TV");
-        mList.add("Otro");
+        mList.add("RT - Regulador de tránsito");
+        mList.add("CR - Caja de revisión");
+        mList.add("CT - Centro de control de tránsito");
+        mList.add("SD - Ducto de semaforización");
+        mList.add("DI - Detector intrusivo");
+        mList.add("DNI - Detector no intrusivo");
+        mList.add("GBM - Gabinete de zona");
+        mList.add("GB1 - Gabinete 8 canales");
+        mList.add("GB2 - Gabinete 12 canales");
+        mList.add("GB3 - Gabinete 16 canales");
+        mList.add("RZ - Central de zona");
+        mList.add("CM - Otro complementario");
         return mList;
     }
 
     public static String mIdTypeOtro(int position){
         switch (position){
             case 0:
-                return "1";
+                return "RT";
             case 1:
-                return "2";
+                return "CR";
+            case 2:
+                return "CT";
+            case 3:
+                return "SD";
+            case 4:
+                return "DI";
+            case 5:
+                return "DNI";
+            case 6:
+                return "GBM";
+            case 7:
+                return "GB1";
+            case 8:
+                return "GB2";
+            case 9:
+                return "GB3";
+            case 10:
+                return "RZ";
             default:
-                return "ND";
+                return "CM";
         }
     }
-
-
-
-
 }

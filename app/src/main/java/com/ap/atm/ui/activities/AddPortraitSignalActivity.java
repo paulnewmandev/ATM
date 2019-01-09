@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
@@ -70,6 +71,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -166,6 +168,8 @@ public class AddPortraitSignalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_portrait_signal);
+        Toolbar toolbar = findViewById(R.id.mSimpleToolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("NUEVA "+getString(R.string.signal_vertical));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mContext = this;
@@ -928,6 +932,7 @@ public class AddPortraitSignalActivity extends AppCompatActivity {
 
     private void showStates(){
         mListStates = SessionUtils.getListStrings(mContext, SessionUtils.prefs.states.name());
+        Collections.reverse(mListStates);
         mListStates.add(0, "Estado");
         mStatesAdapter = new ArrayAdapter<>(mContext, R.layout.item_spinner, mListStates);
         mSpinState.setAdapter(mStatesAdapter);

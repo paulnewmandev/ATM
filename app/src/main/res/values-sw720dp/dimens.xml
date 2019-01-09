@@ -6,8 +6,10 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
-    <dimen name="label_size">28sp</dimen>
+    <dimen name="label_size">30sp</dimen>
     <dimen name="label_margin">15dp</dimen>
-    <dimen name="input_text_size">30sp</dimen>
-    <dimen name="input_label_size">15sp</dimen>
+    <dimen name="input_text_size">34sp</dimen>
+    <dimen name="input_label_size">26sp</dimen>
+    <dimen name="toolbar_size">120dp</dimen>
+    <dimen name="toolbar_text_size">42sp</dimen>
 </resources>

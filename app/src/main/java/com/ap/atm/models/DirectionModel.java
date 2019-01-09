@@ -12,8 +12,11 @@ public class DirectionModel implements Serializable {
 
     public static List<String> mDirections(){
         List<String> mList = new ArrayList<>();
-        mList.add("Alfabetico cardinal");
-        mList.add("Otro");
+        mList.add("Norte-Sur");
+        mList.add("Sur-Norte");
+        mList.add("Este-Oeste");
+        mList.add("Oeste-Este");
+        mList.add("No Aplica");
         return mList;
     }
 

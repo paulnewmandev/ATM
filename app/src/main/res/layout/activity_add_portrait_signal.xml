@@ -6,12 +6,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-
     tools:context="com.ap.atm.ui.activities.AddPortraitSignalActivity">
+
+    <include
+        layout="@layout/simple_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/toolbar_size">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,7 +38,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/mPortSigInpLatitude"
-                    style="@style/LabelInputTextStyle"
+                    app:hintTextAppearance="@style/TextInputLayout.HintText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -50,7 +55,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/mPortSigInpLongitude"
-                    style="@style/LabelInputTextStyle"
+                    app:hintTextAppearance="@style/TextInputLayout.HintText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -68,7 +73,7 @@
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/mPortSigInpAddressGoogle"
-                style="@style/LabelInputTextStyle"
+                app:hintTextAppearance="@style/TextInputLayout.HintText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -77,7 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
-                    android:hint="Dirección Goolge"
+                    android:hint="Dirección Google"
                     android:text=" "
                     tools:text="Direccion google de prueba" />
             </android.support.design.widget.TextInputLayout>
@@ -95,7 +100,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/mPortSigInpStreet1"
-                    style="@style/LabelInputTextStyle"
+                    app:hintTextAppearance="@style/TextInputLayout.HintText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
@@ -110,7 +115,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/mPortSigInpStreet2"
-                    style="@style/LabelInputTextStyle"
+                    app:hintTextAppearance="@style/TextInputLayout.HintText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
@@ -131,7 +136,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/mPortSigInpBarrio"
-                    style="@style/LabelInputTextStyle"
+                    app:hintTextAppearance="@style/TextInputLayout.HintText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
@@ -146,7 +151,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/mPortSigInpParroquia"
-                    style="@style/LabelInputTextStyle"
+                    app:hintTextAppearance="@style/TextInputLayout.HintText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
@@ -162,7 +167,7 @@
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/mPortSigInpOrientation"
-                style="@style/LabelInputTextStyle"
+                app:hintTextAppearance="@style/TextInputLayout.HintText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -177,7 +182,7 @@
                 style="@style/TextLabelStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Categoria" />
+                android:text="Categoría" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -223,7 +228,7 @@
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/mPortSigInpVariacion"
-                style="@style/LabelInputTextStyle"
+                app:hintTextAppearance="@style/TextInputLayout.HintText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
@@ -237,7 +242,7 @@
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/mPortSigInpInformation"
-                style="@style/LabelInputTextStyle"
+                app:hintTextAppearance="@style/TextInputLayout.HintText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
@@ -254,6 +259,7 @@
                 style="@style/TextLabelStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:button="@drawable/check_box_selector"
                 android:text="Esta señal posee información complementaria" />
 
             <TextView
@@ -289,7 +295,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Caracteristicas" />
+                android:text="Características" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -342,7 +348,7 @@
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/mPortSigInpDimension"
-                style="@style/LabelInputTextStyle"
+                app:hintTextAppearance="@style/TextInputLayout.HintText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -359,6 +365,7 @@
                 style="@style/TextLabelStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:button="@drawable/check_box_selector"
                 android:text="El entorno tiene señalización horizontal" />
 
             <TextView
@@ -373,7 +380,7 @@
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/mPortSigInpComentario"
-                style="@style/LabelInputTextStyle"
+                app:hintTextAppearance="@style/TextInputLayout.HintText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -391,7 +398,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/mPortSigInpInventario"
-                    style="@style/LabelInputTextStyle"
+                    app:hintTextAppearance="@style/TextInputLayout.HintText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
@@ -407,7 +414,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/mPortSigInpEquipment"
-                    style="@style/LabelInputTextStyle"
+                    app:hintTextAppearance="@style/TextInputLayout.HintText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -433,7 +440,7 @@
                     style="@style/TextLabelStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Imagenes Seleccionadas" />
+                    android:text="Imágenes Seleccionadas" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/mPortSigRecyclerImages"

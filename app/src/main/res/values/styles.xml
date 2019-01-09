@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -14,7 +16,13 @@
     </style>
 
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">58sp</item>
+        <item name="android:textSize">@dimen/toolbar_text_size</item>
+    </style>
+
+    <style name="TextInputLayout.HintText" parent="Widget.Design.TextInputLayout">
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textSize">@dimen/input_label_size</item>
+
     </style>
 
     <style name="TextLabelStyle" parent="android:Widget.TextView">

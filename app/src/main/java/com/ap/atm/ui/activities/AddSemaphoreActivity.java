@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
@@ -68,6 +69,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -158,6 +160,8 @@ public class AddSemaphoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_semaphore);
+        Toolbar toolbar = findViewById(R.id.mSimpleToolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("NUEVO "+getString(R.string.semaforo));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mContext = this;
@@ -767,7 +771,7 @@ public class AddSemaphoreActivity extends AppCompatActivity {
 
     private void showReguladores(){
         mListReguladores = SessionUtils.getListStrings(mContext, SessionUtils.prefs.reguladores.name());
-        mListReguladores.add(0, "Regulador");
+        mListReguladores.add(0, "Controlador");
         mReguladoresAdapter = new ArrayAdapter<>(mContext, R.layout.item_spinner, mListReguladores);
         mSpinRegulador.setAdapter(mReguladoresAdapter);
     }
@@ -832,6 +836,7 @@ public class AddSemaphoreActivity extends AppCompatActivity {
 
     private void showEstados(){
         mListStatus = SessionUtils.getListStrings(mContext, SessionUtils.prefs.states.name());
+        Collections.reverse(mListStatus);
         mListStatus.add(0, "Estado");
         mStatusAdapter = new ArrayAdapter<>(mContext, R.layout.item_spinner, mListStatus);
         mSpinStatus.setAdapter(mStatusAdapter);

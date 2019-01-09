@@ -7,9 +7,15 @@
     android:fitsSystemWindows="true"
     tools:context="com.ap.atm.ui.activities.AddPortraitSignalActivity">
 
+    <include
+        layout="@layout/simple_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/toolbar_size">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,7 +36,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/mSemaphoreInpLatitude"
-                    style="@style/LabelInputTextStyle"
+                    app:hintTextAppearance="@style/TextInputLayout.HintText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -46,7 +52,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/mSemaphoreInpLongitude"
-                    style="@style/LabelInputTextStyle"
+                    app:hintTextAppearance="@style/TextInputLayout.HintText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -63,7 +69,7 @@
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/mSemaphoreInpGoogleAddress"
-                style="@style/LabelInputTextStyle"
+                app:hintTextAppearance="@style/TextInputLayout.HintText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -72,7 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
-                    android:hint="Direccion Google"
+                    android:hint="Dirección Google"
                     android:text=" " />
             </android.support.design.widget.TextInputLayout>
 
@@ -89,7 +95,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/mSemaphoreInpStreet1"
-                    style="@style/LabelInputTextStyle"
+                    app:hintTextAppearance="@style/TextInputLayout.HintText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
@@ -104,7 +110,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/mSemaphoreInpStreet2"
-                    style="@style/LabelInputTextStyle"
+                    app:hintTextAppearance="@style/TextInputLayout.HintText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
@@ -125,7 +131,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/mSemaphoreInpBarrio"
-                    style="@style/LabelInputTextStyle"
+                    app:hintTextAppearance="@style/TextInputLayout.HintText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
@@ -140,7 +146,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/mSemaphoreInpParroquia"
-                    style="@style/LabelInputTextStyle"
+                    app:hintTextAppearance="@style/TextInputLayout.HintText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="3dp"
@@ -163,7 +169,7 @@
                 style="@style/TextLabelStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Caracteristicas" />
+                android:text="Características" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -244,7 +250,7 @@
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/mSemaphoreInpInventario"
-                style="@style/LabelInputTextStyle"
+                app:hintTextAppearance="@style/TextInputLayout.HintText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
@@ -258,7 +264,7 @@
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/mSemaphoreInpComentario"
-                style="@style/LabelInputTextStyle"
+                app:hintTextAppearance="@style/TextInputLayout.HintText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -271,7 +277,7 @@
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/mSemaphoreInpEquipment"
-                style="@style/LabelInputTextStyle"
+                app:hintTextAppearance="@style/TextInputLayout.HintText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 

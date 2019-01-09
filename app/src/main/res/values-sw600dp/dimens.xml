@@ -8,6 +8,8 @@
 
     <dimen name="label_size">20sp</dimen>
     <dimen name="label_margin">10dp</dimen>
-    <dimen name="input_text_size">22sp</dimen>
-    <dimen name="input_label_size">11sp</dimen>
+    <dimen name="input_text_size">28sp</dimen>
+    <dimen name="input_label_size">18sp</dimen>
+    <dimen name="toolbar_size">80dp</dimen>
+    <dimen name="toolbar_text_size">30sp</dimen>
 </resources>
