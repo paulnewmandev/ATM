@@ -1148,7 +1148,7 @@ public class AddSemaphoreActivity extends AppCompatActivity {
                     mModel.id = 0;
                     mModel.element = ElementSemaphoreModel.mIdElement(mSpinElement.getSelectedItemPosition());
                     mModel.type_element_id = TypesElements.getIdElement(mSpinElement.getSelectedItemPosition()+1, mSpinType.getSelectedItemPosition());
-                    mModel.status = mSpinStatus.getSelectedItemPosition();
+                    mModel.status = mListStatus.size() - mSpinStatus.getSelectedItemPosition();
                     mModel.direction = mSpinDirection.getSelectedItemPosition();
                     mListElementsObjects.add(mModel);
                     mElementsAdapter.notifyDataSetChanged();

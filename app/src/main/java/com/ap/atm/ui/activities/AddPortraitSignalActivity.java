@@ -1128,7 +1128,7 @@ public class AddPortraitSignalActivity extends AppCompatActivity {
         mParams.put(ApiUtils.parameters.variation.name(), FormUtils.sanitazeInput(mVariacion));
         mParams.put(ApiUtils.parameters.additional_info.name(), FormUtils.sanitazeInput(mInformation));
         mParams.put(ApiUtils.parameters.is_additional_info.name(), 1);
-        mParams.put(ApiUtils.parameters.state.name(), mSpinState.getSelectedItemPosition());
+        mParams.put(ApiUtils.parameters.state.name(), mListStates.size() - mSpinState.getSelectedItemPosition());
         mParams.put(ApiUtils.parameters.normative.name(), mSpinNormativa.getSelectedItemPosition());
         mParams.put(ApiUtils.parameters.shape.name(), mSpinForma.getSelectedItemPosition());
         mParams.put(ApiUtils.parameters.background_color.name(), mSpinColor.getSelectedItemPosition());
